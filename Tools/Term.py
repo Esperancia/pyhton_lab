@@ -1,4 +1,5 @@
-from ..Exceptions.ZeroCoefficientException import ZeroCoefficientException
+from Exceptions.ZeroCoefficientException import ZeroCoefficientException
+
 
 # 1----------------------------------------------------------------
 class Term:
@@ -25,14 +26,10 @@ class Term:
     
     def getExponent(self):
         return self.__exponent
-    
+
 # 4----------------------------------------------------------------
     def __str__(self):
         if self.__variable in [None, ""] or self.__exponent in [None, 0, ""]:
             return f"{self.__coefficient}"
         else:
             return f"{self.__coefficient}{self.__variable}^{self.__exponent}"
-
-
-if __name__ == '__main__':
-    print(__package__)

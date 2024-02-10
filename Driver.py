@@ -1,6 +1,7 @@
-from tools.Term import Term
-from tools.Polynomial import Polynomial
-from tools.PolynomialToolbox import PolynomialToolbox
+from Tools.Polynomial import Polynomial
+from Tools.PolynomialToolbox import PolynomialToolbox
+from Tools.Term import Term
+
 
 class Driver:
 

@@ -1,33 +1,26 @@
-import sys
+from Tools.Polynomial import Polynomial
+from Tools.Term import Term
 
-from .Exceptions.ZeroCoefficientException import ZeroCoefficientException
-
-from .Tools.Polynomial import Polynomial
-from .Tools.Term import Term
-from .Tools.Utils import Utils
 
 class ConsoleApp:
 
     def __init__(self):
         self.polynomes = []
-    
 
     def initListePolynome(self):
-        t0 = Term("t0", 3.0, 'x', 2) # 3x^2
-        t1 = Term("t1", -2.0, 'y', 3) # -2y^3
-        t2 = Term("t2", 4.0, 'x', 4) # 4x^4
-        t3 = Term("t3", 8.0, ' ', 0) # 8
+        t0 = Term("t0", 3.0, 'x', 2)  # 3x^2
+        t1 = Term("t1", -2.0, 'y', 3)  # -2y^3
+        t2 = Term("t2", 4.0, 'x', 4)  # 4x^4
+        t3 = Term("t3", 8.0, ' ', 0)  # 8
 
         l1 = Polynomial('P1')
         l1.addTerm(t0)
         l1.addTerm(t1)
-        
+
         l2 = Polynomial('P2')
         l2.addTerm(t2)
         l2.addTerm(t3)
         self.polynomes = [l1, l2]
-
-
 
     @staticmethod
     def saisirTermes():
@@ -35,7 +28,7 @@ class ConsoleApp:
         while True:
             terme_name = input("Entrez le nom du terme (ou 'q' pour arrêter) :").strip()
             if terme_name.lower() == 'q':
-                break # Quitter la boucle si l'utilisateur entre 'q'
+                break  # Quitter la boucle si l'utilisateur entre 'q'
             try:
                 variable = input("Entrez la variable du terme : ")
                 coefficient = float(input("Entrez le coefficient du terme : "))
@@ -47,7 +40,6 @@ class ConsoleApp:
             except Exception as e:
                 print(f"Erreur de saisie: {e}")
         return termes
-        
 
     def afficherMenu(self):
         print("********************")
@@ -61,7 +53,6 @@ class ConsoleApp:
         print("0 - Quitter")
         print("********************")
 
-
     def afficherNomsPolynomesExistants(self):
         pass
         # ajouter code ici
@@ -70,7 +61,7 @@ class ConsoleApp:
         print("Voici la liste des polynômes")
         self.afficherNomsPolynomesExistants()
         return input("Saisir le nom du polynôme: ")
-    
+
     def ajoutPolynome(self):
         self.saisirNomPolynome()
         # ajouter code ici
@@ -84,31 +75,30 @@ class ConsoleApp:
         pass
         self.saisirNomPolynome()
         # ajouter code ici
-            
+
     def additionnerPolynomes(self):
         pass
         p1 = self.saisirNomPolynome()
         p2 = self.saisirNomPolynome()
         # ajouter code ici
-    
+
     def sauvegarderPolynomes(self):
         pass
         # ajouter code ici
-    
+
     def chargerPolynomes(self):
         pass
         # ajouter code ici
-    
+
     def trierPolynome(self):
         pass
         # ajouter code ici
-    
 
     def afficherPrompt(self):
         while True:
             self.afficherMenu()
             option = int(input("Sélectioner une option: "))
-            
+
             if option == 1:
                 self.ajoutPolynome()
             elif option == 2:
@@ -130,7 +120,7 @@ class ConsoleApp:
                 print("Erreur - stop")
                 break
 
-        
+
 if __name__ == "__main__":
     app = ConsoleApp()
     app.initListePolynome()
