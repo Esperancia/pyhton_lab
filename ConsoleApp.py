@@ -66,8 +66,18 @@ class ConsoleApp:
         return input("Saisir le nom du polynôme: ")
 
 
+    #new: check if polynome with this name exists
+    def getPolynomeByName(self, name):
+        for p in self.polynomes:
+            if p.PolynomialName == name:
+                return p
+
     def ajoutPolynome(self):
         nom = self.saisirNomPolynome()
+        while self.getPolynomeByName(nom) is not None:
+            print("un polynome avec ce nom existe deja")
+            nom = self.saisirNomPolynome()
+
         termes = self.saisirTermes()
         self.polynomes.append(Polynomial(nom, termes))
 
@@ -78,18 +88,14 @@ class ConsoleApp:
 
 
     def simpilifierPolynome(self):
-        pass
-        # self.saisirNomPolynome()
-        # ajouter code ici
-        # return PolynomialToolbox.simplify(self.saisirNomPolynome())
+        nom = self.saisirNomPolynome()
+        return PolynomialToolbox.simplify(self.getPolynomeByName(nom))
 
 
     def additionnerPolynomes(self):
-        pass
-        # ajouter code ici
-        # p1 = self.saisirNomPolynome()
-        # p2 = self.saisirNomPolynome()
-        # return PolynomialToolbox.sum(p1, p2)
+        p1 = self.saisirNomPolynome()
+        p2 = self.saisirNomPolynome()
+        return PolynomialToolbox.sum(self.getPolynomeByName(p1), self.getPolynomeByName(p2))
 
     def sauvegarderPolynomes(self):
         pass
