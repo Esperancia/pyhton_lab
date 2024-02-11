@@ -1,5 +1,6 @@
 from Exceptions.ZeroCoefficientException import ZeroCoefficientException
 from Tools.Polynomial import Polynomial
+from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
 
 
@@ -55,33 +56,40 @@ class ConsoleApp:
         print("********************")
 
     def afficherNomsPolynomesExistants(self):
-        pass
-        # ajouter code ici
+        for polynom in self.polynomes:
+            print(polynom.PolynomialName)
+
 
     def saisirNomPolynome(self):
         print("Voici la liste des polynômes")
         self.afficherNomsPolynomesExistants()
         return input("Saisir le nom du polynôme: ")
 
-    def ajoutPolynome(self):
-        self.saisirNomPolynome()
-        # ajouter code ici
 
-    # ajouter code ici
+    def ajoutPolynome(self):
+        nom = self.saisirNomPolynome()
+        termes = self.saisirTermes()
+        self.polynomes.append(Polynomial(nom, termes))
+
+
     def afficherPolynomes(self):
-        pass
-        # ajouter code ici
+        for polynom in self.polynomes:
+            print(str(polynom))
+
 
     def simpilifierPolynome(self):
         pass
-        self.saisirNomPolynome()
+        # self.saisirNomPolynome()
         # ajouter code ici
+        # return PolynomialToolbox.simplify(self.saisirNomPolynome())
+
 
     def additionnerPolynomes(self):
         pass
-        p1 = self.saisirNomPolynome()
-        p2 = self.saisirNomPolynome()
         # ajouter code ici
+        # p1 = self.saisirNomPolynome()
+        # p2 = self.saisirNomPolynome()
+        # return PolynomialToolbox.sum(p1, p2)
 
     def sauvegarderPolynomes(self):
         pass
