@@ -14,6 +14,13 @@ class Driver:
     print("Ajout de t0 dans l1:", l1.addTerm(t0))
     print("Ajout de t1 dans l1:", l1.addTerm(t1))
 
+
+    t4 = Term("t0", 7.0, 'x', 2) # 7x^2
+    print("Ajout de t0 dans l1:", l1.addTerm(t3))
+    print("Ajout de t1 dans l1:", l1.addTerm(t2))
+
+
+
     print("Termes dans l1:", [str(term) for term in l1.getAllTerms()])
     print("Exposants dans l1:", l1.getExponents())
 

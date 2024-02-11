@@ -1,3 +1,4 @@
+from Exceptions.ZeroCoefficientException import ZeroCoefficientException
 from Tools.Polynomial import Polynomial
 from Tools.Term import Term
 

@@ -1,3 +1,5 @@
+from typing import List
+
 from Tools.Term import Term
 from Tools.Utils import Utils
 
@@ -5,7 +7,7 @@ from Tools.Utils import Utils
 class Polynomial:
 
     # 1----------------------------------------------------------------
-    def __init__(self, PolynomialName, TermsList: Term = []):
+    def __init__(self, PolynomialName, TermsList: List[Term] = []):
         # TODO: exceptions should be caught
 
         self.PolynomialName = PolynomialName
@@ -19,12 +21,12 @@ class Polynomial:
         return False
 
     def removeTerm(self, t: Term):
-        if (t.lower() in [x.lower() for x in self.termsList]):
+        if t in self.termsList:
             self.termsList.remove(t)
             return True
         return False
 
-    def getTermCount(self):
+    def getTermCount(self) -> int:
         return len(self.termsList)
 
     def getVariables(self):
@@ -41,11 +43,15 @@ class Polynomial:
                 exponents.append(t.getVariable())
         return exponents
 
-    def getTerms(self, variable, exponent):
-        pass
+    def getTerms(self, variable, exponent) -> List[Term]:
+        terms = []
+        for t in self.termsList:
+            if t.getVariable() is variable and t.getExponent() is exponent:
+                terms.append(t)
+        return terms
 
-    def getAllTerms(self):
-        pass
+    def getAllTerms(self) -> List[Term]:
+        return self.termsList
 
     def sort(self):
         pass
@@ -55,7 +61,7 @@ class Polynomial:
 
 
 if __name__ == "__main__":
-    pol = Polynomial('test', ['2x^3', '4y', '-5x', '6'])
+    # pol = Polynomial('test', ['2x^3', '4y', '-5x', '6'])
     # term = Term('test', 2, "x", 3)
     # print(term.__str__())   #or print(str(term)). it is same thing
     # print(pol.getVariables())
