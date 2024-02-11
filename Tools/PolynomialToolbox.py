@@ -9,42 +9,41 @@ from Tools.Term import Term
 class PolynomialToolbox:
     @classmethod
     def simplify(cls, l1) -> Polynomial:
-        '''
-        new_l1 = Polynomial('forme_simplifiee', [])
-        for t in l1.getAllTerms():
-            variable = t.getVariable()
-            coefficient = t.getCoefficient()
-            exponent = t.getExponent()
-            tmp_coefficient = []
-            if
-        '========'
-        d = defaultdict(l1.getAllTerms())
-        print(d)
-        for t in tmp_list:
-           # d[t.getVariable()].append(i)
-            print(t)
-        '''
-        tmp_list = []
+        # tmp_list = [k for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent()))]
+        # print(tmp_list)
+        # for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent())):
+        #    print("key: '{}'--> group: {}".format(k, list(g)))
 
-        '''
-        for term, variable_exponent in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '' + str(x.getExponent())):
-            for item in variable_exponent:
-                print(item)
-                tmp_list.append(item.getCoefficient())
-            print("")
-        '''
+        termesPolynome: List[Term] = l1.getAllTerms()
+        termesNouveauPolynome: List[Term] = []
 
-        #tmp_list = [k for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent()))]
-        #print(tmp_list)
+        groups = [k for k, g in groupby(termesPolynome, lambda x: x.getVariable() + '^' + str(x.getExponent()))]
+        my_dict = {}
 
-        for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent())):
-            print("key: '{}'--> group: {}".format(k, list(g)))
+        for group in groups:
+            tmp_list = []
+            for obj in termesPolynome:
+                if group == obj.getVariable() + '^' + str(obj.getExponent()):
+                    tmp_list.append(obj)
+            my_dict[group] = tmp_list
 
-        return Polynomial('forme_simplifiee', tmp_list)
+        for (group, glist) in my_dict.items():
+            sommeCoef = sum(term.getCoefficient() for term in glist)
+            variable = glist[0].getVariable()
+            exponent = glist[0].getExponent()
+            termesNouveauPolynome.append(Term('', sommeCoef, variable, exponent))
+
+        newL1 = Polynomial('simplified', termesNouveauPolynome)
+        if l1.__str__() == newL1.__str__():
+            print("Le polynome ne peut pas etre plus simplifie.")
+        print(newL1.__str__())
+
 
     @classmethod
     def sum(cls, l1: Polynomial, l2: Polynomial) -> Polynomial:
         tmp_res = [*l1.getAllTerms(), *l2.getAllTerms()]
+        for term in tmp_res:
+            print(term.__str__())
         res = Polynomial('resultat_sum', tmp_res)
         return cls.simplify(res)
 

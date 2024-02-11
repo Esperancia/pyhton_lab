@@ -91,7 +91,6 @@ class ConsoleApp:
         nom = self.saisirNomPolynome()
         return PolynomialToolbox.simplify(self.getPolynomeByName(nom))
 
-
     def additionnerPolynomes(self):
         p1 = self.saisirNomPolynome()
         p2 = self.saisirNomPolynome()
