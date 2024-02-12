@@ -1,7 +1,8 @@
 from typing import List
+from functools import cmp_to_key
 
 from Tools.Term import Term
-from Tools.Utils import Utils
+from Tools.TermComparator import TermComparator
 
 
 class Polynomial:
@@ -54,7 +55,12 @@ class Polynomial:
         return self.termsList
 
     def sort(self):
-        pass
+        # TODO: sorted_terms, let put default values of list for now
+        # sorted_terms = sorted(self.termsList, key=lambda x: TermComparator.compare)
+        # sorted_terms = sorted(self.termsList, key=cmp_to_key(TermComparator.compare))
+        sorted_terms = self.termsList
+        return self.__init__('sorted Polynomial', sorted_terms)
+
 
     def __str__(self):
         return ("+".join(str(t) for t in self.termsList)).replace("+-", "-")
@@ -65,4 +71,4 @@ if __name__ == "__main__":
     # term = Term('test', 2, "x", 3)
     # print(term.__str__())   #or print(str(term)). it is same thing
     # print(pol.getVariables())
-    Utils.compare_lengths('toto', 'tot')
+    TermComparator.compare_lengths('toto', 'tot')

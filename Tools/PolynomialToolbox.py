@@ -37,16 +37,14 @@ class PolynomialToolbox:
         if l1.__str__() == newL1.__str__():
             print("Le polynome ne peut pas etre plus simplifie.")
         print(newL1.__str__())
+        return newL1
 
 
     @classmethod
     def sum(cls, l1: Polynomial, l2: Polynomial) -> Polynomial:
         tmp_res = [*l1.getAllTerms(), *l2.getAllTerms()]
-        for term in tmp_res:
-            print(term.__str__())
+        # for term in tmp_res:
+            # print(term.__str__())
         res = Polynomial('resultat_sum', tmp_res)
         return cls.simplify(res)
 
-    @classmethod
-    def sort(cls):
-        pass

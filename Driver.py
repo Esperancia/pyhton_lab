@@ -1,6 +1,7 @@
 from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
+from Tools.TermComparator import TermComparator
 
 
 class Driver:
