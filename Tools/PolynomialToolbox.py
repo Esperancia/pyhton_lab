@@ -29,9 +29,10 @@ class PolynomialToolbox:
 
         for (group, glist) in my_dict.items():
             sommeCoef = sum(term.getCoefficient() for term in glist)
-            variable = glist[0].getVariable()
-            exponent = glist[0].getExponent()
-            termesNouveauPolynome.append(Term('', sommeCoef, variable, exponent))
+            if sommeCoef != 0:
+                variable = glist[0].getVariable()
+                exponent = glist[0].getExponent()
+                termesNouveauPolynome.append(Term('', sommeCoef, variable, exponent))
 
         newL1 = Polynomial('simplified', termesNouveauPolynome)
         if l1.__str__() == newL1.__str__():
