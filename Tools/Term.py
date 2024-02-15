@@ -8,10 +8,18 @@ class Term:
 # 2----------------------------------------------------------------
     def __init__(self, TermName, Coefficient, Variable, Exponent):
         # TODO: exceptions should be caught
-        
         if Coefficient is None or Coefficient == "":
             raise ZeroCoefficientException("Terms with a zero coeffcient are invalid")
-        
+        if type(Coefficient) is not float:
+            print("Coefficient doit etre un reel")
+            return
+        if type(Variable) is not str:
+            print("Variable doit etre un caractere ou chaine de caracteres")
+            return
+        if type(Exponent) is not int:
+            print("Exponent doit etre un entier")
+            return
+
         self.TermName = TermName
         self.__coefficient = Coefficient
         self.__variable = Variable
