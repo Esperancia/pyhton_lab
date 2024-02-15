@@ -1,7 +1,11 @@
+import os
+import sys
+
 from Exceptions.ZeroCoefficientException import ZeroCoefficientException
 from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
+from Tools.Utils import Utils
 
 
 class ConsoleApp:
@@ -97,12 +101,59 @@ class ConsoleApp:
         return PolynomialToolbox.sum(self.getPolynomeByName(p1), self.getPolynomeByName(p2))
 
     def sauvegarderPolynomes(self):
-        pass
-        # ajouter code ici
+        print("Entrez le chemin_dossier :")
+        folder = input()
+        if folder is None:
+            print("Le chemin du dossier est obligatoire")
+            return
+        if folder[-1] != '/':
+            print("Le chemin du dossier est incorrect. Le chemin du dossier doit finir par /")
+            return
+
+        print("Entrez le nom du fichier :")
+        filename = input()
+        if filename is None:
+            print("Le nom du fichier a creer est obligatoire")
+
+        sauvegarder_script_path = os.path.abspath("sauvegarder.py")
+        # `sudo chmod +x sauvegarder.py`
+
+        Utils.addToPathIfNotExists(sauvegarder_script_path)
+
+        textes = []
+        global item
+
+        for polynom in self.polynomes:
+            item = polynom.PolynomialName + "\n"
+            for term in polynom.getAllTerms():
+                item += "{},{},{},{}".format(term.TermName, term.getCoefficient(), term.getVariable(), term.getExponent()) + "\n"
+            item += "\n"
+            textes.append(item)
+            
+        print(textes)
+        os.system("{} {} {} {}".format(sauvegarder_script_path, folder, filename, textes))
+        print("sauvegarde en cours...")
+
 
     def chargerPolynomes(self):
-        pass
-        # ajouter code ici
+        (folder_path, file_name) = (sys.argv[1], sys.argv[2])
+
+        with open(folder_path + file_name, "r") as file_content:
+            tmp_polynomes = file_content.read().split("\n\n")
+
+            for p in tmp_polynomes:
+                tmp_polynom = p.split("\n")
+                polynome_terms = []
+                polynome_name = tmp_polynom[0]
+                for t in tmp_polynom[1]:
+                    tmp_term = t.split(',')
+                    term_name = tmp_term[0]
+                    term_coefficient = tmp_term[1]
+                    term_variable = tmp_term[2]
+                    term_exponent = tmp_term[3]
+                    polynome_terms.append(Term(term_name, term_coefficient, term_variable, term_exponent))
+            self.polynomes.append(Polynomial(polynome_name, polynome_terms))
+
 
     def trierPolynome(self):
         pass
