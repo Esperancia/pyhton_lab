@@ -1,5 +1,4 @@
-from typing import List
-from functools import cmp_to_key
+import string
 
 from Tools.Term import Term
 from Tools.TermComparator import TermComparator
@@ -8,7 +7,7 @@ from Tools.TermComparator import TermComparator
 class Polynomial:
 
     # 1----------------------------------------------------------------
-    def __init__(self, PolynomialName, TermsList: List[Term] = []):
+    def __init__(self, PolynomialName: string, TermsList: list[Term] = []):
         # TODO: exceptions should be caught
 
         self.PolynomialName = PolynomialName
@@ -44,14 +43,14 @@ class Polynomial:
                 exponents.append(t.getVariable())
         return exponents
 
-    def getTerms(self, variable, exponent) -> List[Term]:
+    def getTerms(self, variable, exponent) -> list[Term]:
         terms = []
         for t in self.termsList:
             if t.getVariable() is variable and t.getExponent() is exponent:
                 terms.append(t)
         return terms
 
-    def getAllTerms(self) -> List[Term]:
+    def getAllTerms(self) -> list[Term]:
         return self.termsList
 
     def sort(self):
