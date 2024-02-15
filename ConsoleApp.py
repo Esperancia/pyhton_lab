@@ -120,18 +120,15 @@ class ConsoleApp:
 
         Utils.addToPathIfNotExists(sauvegarder_script_path)
 
-        textes = []
-        global item
-
+        texte = ''
         for polynom in self.polynomes:
-            item = polynom.PolynomialName + "\n"
+            poly_lines = polynom.PolynomialName + ';'
             for term in polynom.getAllTerms():
-                item += "{},{},{},{}".format(term.TermName, term.getCoefficient(), term.getVariable(), term.getExponent()) + "\n"
-            item += "\n"
-            textes.append(item)
-            
-        print(textes)
-        os.system("{} {} {} {}".format(sauvegarder_script_path, folder, filename, textes))
+                poly_lines += "{},{},{},{}".format(term.TermName, term.getCoefficient(), term.getVariable(), term.getExponent()) + ';'
+            texte += poly_lines + ';'
+
+        print(texte)
+        os.system('{} {} {} "{}"'.format(sauvegarder_script_path, folder, filename, texte))
         print("sauvegarde en cours...")
 
 
