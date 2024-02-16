@@ -55,13 +55,8 @@ class Polynomial:
         return self.termsList
 
     def sort(self):
-        # TODO: sorted_terms, let put default values of list for now
-        # sorted_terms = sorted(self.termsList, key=lambda x: TermComparator.compare)
-        # sorted_terms = sorted(self.termsList, key=cmp_to_key(TermComparator.compare))
-        # sorted_terms = sorted(self.termsList, key=cmp_to_key(TermComparator.compare))
         sorted_terms = sorted(self.termsList, key=cmp_to_key(lambda t1, t2: TermComparator.compare(t1, t2)))
         print(sorted_terms)
-        sorted_terms = self.termsList
         return self.__init__('sorted Polynomial', sorted_terms)
 
 
