@@ -40,6 +40,6 @@ if __name__ == "__main__":
 
             mes_polynomes.append(Polynomial(PolynomialName=polynome_name, TermsList=polynome_terms))
 
-    for p in mes_polynomes:
-        print(p.__str__())
+    # for p in mes_polynomes:
+    #    print(p.__str__())
 

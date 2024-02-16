@@ -7,8 +7,9 @@ from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
 from Tools.Utils import Utils
-from charger import mes_polynomes
+import charger
 
+print(charger.mes_polynomes)
 
 class ConsoleApp:
 
@@ -154,12 +155,10 @@ class ConsoleApp:
         self.polynomes = []
         os.system('{} {} {}'.format(charger_script_path, folder, filename))
         self.polynomes = charger.get_data()
-        print('tooot')
-        # for name, values in vars(charger).items():
-        #    print(name, values)
-        print(mes_polynomes)
-
-        print(charger.mes_polynomes)
+        for name, values in vars(charger).items():
+            print(name, values)
+        # print(mes_polynomes)
+        # print(charger.mes_polynomes)
         #print(charger.get_data())
         print("=================")
         self.afficherPolynomes()
@@ -202,8 +201,6 @@ class ConsoleApp:
 
 
 if __name__ == "__main__":
-    #print('toto')
-    #print(mes_polynomes)
     app = ConsoleApp()
     app.initListePolynome()
     app.afficherPrompt()
