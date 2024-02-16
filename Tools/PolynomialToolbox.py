@@ -9,11 +9,6 @@ from Tools.Term import Term
 class PolynomialToolbox:
     @classmethod
     def simplify(cls, l1) -> Polynomial:
-        # tmp_list = [k for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent()))]
-        # print(tmp_list)
-        # for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent())):
-        #    print("key: '{}'--> group: {}".format(k, list(g)))
-
         termesPolynome: List[Term] = l1.getAllTerms()
         termesNouveauPolynome: List[Term] = []
 
@@ -32,7 +27,9 @@ class PolynomialToolbox:
             if sommeCoef != 0:
                 variable = glist[0].getVariable()
                 exponent = glist[0].getExponent()
-                termesNouveauPolynome.append(Term('', sommeCoef, variable, exponent))
+                # nom = glist[0].TermName # <-----ici
+                nom = "t{}".format(0)
+                termesNouveauPolynome.append(Term(nom, sommeCoef, variable, exponent))
 
         newL1 = Polynomial('simplified', termesNouveauPolynome)
         if l1.__str__() == newL1.__str__():
