@@ -17,10 +17,14 @@ from ConsoleApp import ConsoleApp
 from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
+from charger import get_data
 
 
 def traiter_polynomes():
     print("====================Task traiter_polynomes!==========================")
+
+     #
+    # (folder, filename) = ('docs/', 'liste_polynomes_a_charger')
 
     print("Entrez le chemin_dossier :")
     folder = input()
@@ -42,43 +46,30 @@ def traiter_polynomes():
         print("ce fichier n'existe pas")
         return
 
-    mes_polynomes = []
+    mes_polynomes = get_data(folder, filename)
+    print(mes_polynomes)
 
-    with open(entire_file_path, "r") as file_content:
-        tmp_polynomes = file_content.read().split("\n\n")
-        for p in tmp_polynomes:
-            tmp_polynom = p.split("\n")
-            polynome_name = tmp_polynom[0]
-            polynome_terms = []
-
-            for t in tmp_polynom[1:]:
-                tmp_term = t.split(',')
-                term_name = tmp_term[0]
-                term_coefficient = float(tmp_term[1])
-                term_variable = tmp_term[2]
-                term_exponent = int(tmp_term[3])
-                polynome_terms.append(Term(term_name, term_coefficient, term_variable, term_exponent))
-
-            mes_polynomes.append(Polynomial(PolynomialName=polynome_name, TermsList=polynome_terms))
+    texte = ''
 
     for polynome in mes_polynomes:
         old_name = polynome.PolynomialName
         new_polynome = PolynomialToolbox.simplify(polynome)
 
-        texte = ''
         poly_lines = old_name + '_' + new_polynome.PolynomialName + ';'
         for term in new_polynome.getAllTerms():
-            poly_lines += "{},{},{},{}".format(term.TermName, term.getCoefficient(), term.getVariable(), term.getExponent()) + ';'
-        texte += poly_lines + ';;'
+            poly_lines += "{},{},{},{}".format(term.TermName, term.getCoefficient(), term.getVariable(),
+                                               term.getExponent()) + ';'
+        texte += poly_lines + ';'
 
-        print(texte)
-        sauvegarder_script_path = os.path.abspath("sauvegarder.py")
+    print(texte)
 
-        os.system('{} {} {} "{}"'.format(sauvegarder_script_path, folder, filename + '_simplife', texte))
+    sauvegarder_script_path = os.path.abspath("sauvegarder.py")
+
+    os.system('{} {} {} "{}"'.format(sauvegarder_script_path, folder, filename + '_simplife', texte))
 
 
 scheduler = sched.scheduler(time.time, time.sleep)
 
-scheduler.enter(600, 1, traiter_polynomes, ())
+scheduler.enter(1, 1, traiter_polynomes, ()) #1 pour le test. 600 avant de soumettre
 
 scheduler.run()

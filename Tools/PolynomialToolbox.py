@@ -24,11 +24,12 @@ class PolynomialToolbox:
 
         for (group, glist) in my_dict.items():
             sommeCoef = sum(term.getCoefficient() for term in glist)
+            tmp_index = list(my_dict.keys()).index(group)
             if sommeCoef != 0:
                 variable = glist[0].getVariable()
                 exponent = glist[0].getExponent()
                 # nom = glist[0].TermName # <-----ici
-                nom = "t{}".format(0)
+                nom = "t{}".format(tmp_index)
                 termesNouveauPolynome.append(Term(nom, sommeCoef, variable, exponent))
 
         newL1 = Polynomial('simplified', termesNouveauPolynome)

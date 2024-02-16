@@ -17,7 +17,7 @@ def get_data(folder_path, file_name):
         sys.exit(1)
 
     with open(entire_file_path, "r") as file_content:
-        tmp_polynomes = file_content.read().split("\n\n")
+        tmp_polynomes = file_content.read().strip().split("\n\n")
         for p in tmp_polynomes:
             tmp_polynom = p.split("\n")
             polynome_name = tmp_polynom[0]
