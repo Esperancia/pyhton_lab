@@ -1,15 +1,12 @@
 import os
 import sys
 
-import charger
 from Exceptions.ZeroCoefficientException import ZeroCoefficientException
 from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
 from Tools.Utils import Utils
-import charger
 
-print(charger.mes_polynomes)
 
 class ConsoleApp:
 
@@ -154,14 +151,18 @@ class ConsoleApp:
 
         self.polynomes = []
         os.system('{} {} {}'.format(charger_script_path, folder, filename))
-        self.polynomes = charger.get_data()
-        for name, values in vars(charger).items():
-            print(name, values)
+        '''
+        from charger import get_data
+
+        self.polynomes = get_data()
+        # for name, values in vars(charger).items():
+            # print(name, values)
         # print(mes_polynomes)
-        # print(charger.mes_polynomes)
-        #print(charger.get_data())
+        # print(charger.get_data())
+        print(self.polynomes)
         print("=================")
         self.afficherPolynomes()
+        '''
 
 
 
