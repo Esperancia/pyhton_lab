@@ -148,9 +148,9 @@ class ConsoleApp:
 
         self.polynomes = []
 
+        print("=======Chargement en cours==========")
         self.polynomes = get_data(folder, filename)
-
-        print("=================")
+        print("=========Chargement fini========")
         self.afficherPolynomes()
 
 
@@ -158,9 +158,9 @@ class ConsoleApp:
     def trierPolynome(self):
         nom = self.saisirNomPolynome()
         polynome = self.getPolynomeByName(nom)
-        print(str(polynome))
-        self.polynomes.remove(polynome)
-        self.polynomes.append(polynome.sort())
+        print(str(polynome), 'avant')
+        polynome.sort()
+        print(str(polynome), 'apres')
 
 
     def afficherPrompt(self):

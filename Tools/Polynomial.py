@@ -55,18 +55,16 @@ class Polynomial:
         return self.termsList
 
     def sort(self):
-        sorted_terms = sorted(self.termsList, key=cmp_to_key(lambda t1, t2: TermComparator.compare(t1, t2)))
-        print(sorted_terms)
-        return self.__init__('sorted Polynomial', sorted_terms)
+        sorted_terms = sorted(self.termsList, key=cmp_to_key(lambda t1, t2: TermComparator.compare(t1, t2)), reverse=True)
+        self.termsList = sorted_terms
 
 
     def __str__(self):
         return ("+".join(str(t) for t in self.termsList)).replace("+-", "-")
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # pol = Polynomial('test', ['2x^3', '4y', '-5x', '6'])
     # term = Term('test', 2, "x", 3)
     # print(term.__str__())   #or print(str(term)). it is same thing
     # print(pol.getVariables())
-    TermComparator.compare_lengths('toto', 'tot')
