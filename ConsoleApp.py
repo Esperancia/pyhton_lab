@@ -73,7 +73,8 @@ class ConsoleApp:
 
     #new: check if polynome with this name exists
     def getPolynomeByName(self, name):
-        return list(filter(lambda x: x.PolynomialName == name, self.polynomes))[0]
+        res = list(filter(lambda x: x.PolynomialName == name, self.polynomes))
+        return res[0] if len(res) else None
 
     def ajoutPolynome(self):
         nom = self.saisirNomPolynome()
@@ -92,12 +93,24 @@ class ConsoleApp:
 
     def simpilifierPolynome(self):
         nom = self.saisirNomPolynome()
-        return PolynomialToolbox.simplify(self.getPolynomeByName(nom))
+        polynome = self.getPolynomeByName(nom)
+        if polynome is None:
+            return
+        return PolynomialToolbox.simplify(polynome)
 
     def additionnerPolynomes(self):
-        p1 = self.saisirNomPolynome()
-        p2 = self.saisirNomPolynome()
+        p1 = self.getPolynomeByName(self.saisirNomPolynome())
+        if p1 is None:
+            print("Verifiez bien que ce polynome existe dans la liste")
+            return
+
+        p2 = self.getPolynomeByName(self.saisirNomPolynome())
+        if p2 is None:
+            print("Verifiez bien que ce polynome existe dans la liste")
+            return
+
         return PolynomialToolbox.sum(self.getPolynomeByName(p1), self.getPolynomeByName(p2))
+
 
     def sauvegarderPolynomes(self):
         print("Entrez le chemin_dossier :")
@@ -158,6 +171,9 @@ class ConsoleApp:
     def trierPolynome(self):
         nom = self.saisirNomPolynome()
         polynome = self.getPolynomeByName(nom)
+        if polynome is None:
+            print("Aucun polynome de ce nom")
+            return
         print(str(polynome), 'avant')
         polynome.sort()
         print(str(polynome), 'apres')
