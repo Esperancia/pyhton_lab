@@ -7,7 +7,7 @@ class Term:
 
 # 2----------------------------------------------------------------
     def __init__(self, TermName, Coefficient, Variable, Exponent):
-        # TODO: exceptions should be caught
+        # exceptions should be caught
         if Coefficient is None or Coefficient == "":
             raise ZeroCoefficientException("Terms with a zero coeffcient are invalid")
         if type(Coefficient) is not float:

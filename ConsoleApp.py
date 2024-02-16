@@ -72,9 +72,7 @@ class ConsoleApp:
 
     #new: check if polynome with this name exists
     def getPolynomeByName(self, name):
-        for p in self.polynomes:
-            if p.PolynomialName == name:
-                return p
+        return list(filter(lambda x: x.PolynomialName == name, self.polynomes))[0]
 
     def ajoutPolynome(self):
         nom = self.saisirNomPolynome()
@@ -127,34 +125,45 @@ class ConsoleApp:
                 poly_lines += "{},{},{},{}".format(term.TermName, term.getCoefficient(), term.getVariable(), term.getExponent()) + ';'
             texte += poly_lines + ';'
 
-        print(texte)
+        # print(texte)
         os.system('{} {} {} "{}"'.format(sauvegarder_script_path, folder, filename, texte))
         print("sauvegarde en cours...")
 
 
     def chargerPolynomes(self):
-        (folder_path, file_name) = (sys.argv[1], sys.argv[2])
+        '''
+        print("Entrez le chemin_dossier :")
+        folder = input()
+        if folder is None:
+            print("Le chemin du dossier est obligatoire")
+            return
+        if folder[-1] != '/':
+            print("Le chemin du dossier est incorrect. Le chemin du dossier doit finir par /")
+            return
 
-        with open(folder_path + file_name, "r") as file_content:
-            tmp_polynomes = file_content.read().split("\n\n")
+        print("Entrez le nom du fichier :")
+        filename = input()
+        if filename is None:
+            print("Le nom du fichier a creer est obligatoire")
 
-            for p in tmp_polynomes:
-                tmp_polynom = p.split("\n")
-                polynome_terms = []
-                polynome_name = tmp_polynom[0]
-                for t in tmp_polynom[1]:
-                    tmp_term = t.split(',')
-                    term_name = tmp_term[0]
-                    term_coefficient = tmp_term[1]
-                    term_variable = tmp_term[2]
-                    term_exponent = tmp_term[3]
-                    polynome_terms.append(Term(term_name, term_coefficient, term_variable, term_exponent))
-            self.polynomes.append(Polynomial(polynome_name, polynome_terms))
+        charger_script_path = os.path.abspath("charger.py")
+
+        Utils.addToPathIfNotExists(charger_script_path)
+
+        self.polynomes = []
+        print(self.polynomes)
+        self.polynomes = os.system('{} {} {}'.format(charger_script_path, folder, filename))
+        print(self.polynomes)
+        '''
 
 
     def trierPolynome(self):
-        pass
-        # ajouter code ici
+        nom = self.saisirNomPolynome()
+        polynome = self.getPolynomeByName(nom)
+        print(str(polynome))
+        self.polynomes.remove(polynome)
+        self.polynomes.append(polynome.sort())
+
 
     def afficherPrompt(self):
         while True:

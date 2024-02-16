@@ -1,4 +1,6 @@
 import string
+from functools import cmp_to_key
+from typing import List
 
 from Tools.Term import Term
 from Tools.TermComparator import TermComparator
@@ -7,11 +9,10 @@ from Tools.TermComparator import TermComparator
 class Polynomial:
 
     # 1----------------------------------------------------------------
-    def __init__(self, PolynomialName: string, TermsList: list[Term] = []):
+    def __init__(self, PolynomialName: string, TermsList: List[Term] = []):
         # TODO: exceptions should be caught
 
         self.PolynomialName = PolynomialName
-        #: :type: list of Term
         self.termsList = TermsList
 
     # 2----------------------------------------------------------------
@@ -43,20 +44,23 @@ class Polynomial:
                 exponents.append(t.getVariable())
         return exponents
 
-    def getTerms(self, variable, exponent) -> list[Term]:
+    def getTerms(self, variable, exponent) -> List[Term]:
         terms = []
         for t in self.termsList:
             if t.getVariable() is variable and t.getExponent() is exponent:
                 terms.append(t)
         return terms
 
-    def getAllTerms(self) -> list[Term]:
+    def getAllTerms(self) -> List[Term]:
         return self.termsList
 
     def sort(self):
         # TODO: sorted_terms, let put default values of list for now
         # sorted_terms = sorted(self.termsList, key=lambda x: TermComparator.compare)
         # sorted_terms = sorted(self.termsList, key=cmp_to_key(TermComparator.compare))
+        # sorted_terms = sorted(self.termsList, key=cmp_to_key(TermComparator.compare))
+        sorted_terms = sorted(self.termsList, key=cmp_to_key(lambda t1, t2: TermComparator.compare(t1, t2)))
+        print(sorted_terms)
         sorted_terms = self.termsList
         return self.__init__('sorted Polynomial', sorted_terms)
 

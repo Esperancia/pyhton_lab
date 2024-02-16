@@ -7,7 +7,7 @@ from Tools.Term import Term
 class TermComparator:
 
     # Fonction de comparaison pour le tri
-    @staticmethod
+    @classmethod
     def compare_lengths(str1, str2):
         if len(str1) < len(str2):
             return -1
@@ -17,6 +17,7 @@ class TermComparator:
             return 1
 
 # 2- ------------------------------------------------------------
+    @classmethod
     def compare(self, t1: Term, t2: Term):
         variable_t1 = t1.getVariable()
         variable_t2 = t2.getVariable()

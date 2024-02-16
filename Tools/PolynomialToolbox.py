@@ -1,5 +1,6 @@
 from collections import defaultdict
 from itertools import groupby
+from typing import List
 
 from Tools.Polynomial import Polynomial
 from Tools.Term import Term
@@ -13,8 +14,8 @@ class PolynomialToolbox:
         # for k, g in groupby(l1.getAllTerms(), lambda x: x.getVariable() + '^' + str(x.getExponent())):
         #    print("key: '{}'--> group: {}".format(k, list(g)))
 
-        termesPolynome: list[Term] = l1.getAllTerms()
-        termesNouveauPolynome: list[Term] = []
+        termesPolynome: List[Term] = l1.getAllTerms()
+        termesNouveauPolynome: List[Term] = []
 
         groups = [k for k, g in groupby(termesPolynome, lambda x: x.getVariable() + '^' + str(x.getExponent()))]
         my_dict = {}
