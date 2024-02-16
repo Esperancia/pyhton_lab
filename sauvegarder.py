@@ -4,9 +4,11 @@ import os
 
 
 if __name__ == "__main__":
+    # print(sys.argv)
     # bof control not really required.
     if len(sys.argv) < 4:
         print("il manque des arguments a l'appel")
+        exit(1)
 
     polynomes_textes = list(filter(None, (sys.argv[3]).strip().split(';;')))
 
