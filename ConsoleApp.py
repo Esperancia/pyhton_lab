@@ -1,11 +1,13 @@
 import os
 import sys
 
+import charger
 from Exceptions.ZeroCoefficientException import ZeroCoefficientException
 from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
 from Tools.Utils import Utils
+from charger import mes_polynomes
 
 
 class ConsoleApp:
@@ -131,7 +133,6 @@ class ConsoleApp:
 
 
     def chargerPolynomes(self):
-        '''
         print("Entrez le chemin_dossier :")
         folder = input()
         if folder is None:
@@ -151,10 +152,18 @@ class ConsoleApp:
         Utils.addToPathIfNotExists(charger_script_path)
 
         self.polynomes = []
-        print(self.polynomes)
-        self.polynomes = os.system('{} {} {}'.format(charger_script_path, folder, filename))
-        print(self.polynomes)
-        '''
+        os.system('{} {} {}'.format(charger_script_path, folder, filename))
+        self.polynomes = charger.get_data()
+        print('tooot')
+        # for name, values in vars(charger).items():
+        #    print(name, values)
+        print(mes_polynomes)
+
+        print(charger.mes_polynomes)
+        #print(charger.get_data())
+        print("=================")
+        self.afficherPolynomes()
+
 
 
     def trierPolynome(self):
@@ -193,6 +202,8 @@ class ConsoleApp:
 
 
 if __name__ == "__main__":
+    #print('toto')
+    #print(mes_polynomes)
     app = ConsoleApp()
     app.initListePolynome()
     app.afficherPrompt()
