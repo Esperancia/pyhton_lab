@@ -6,6 +6,7 @@ from Tools.Polynomial import Polynomial
 from Tools.PolynomialToolbox import PolynomialToolbox
 from Tools.Term import Term
 from Tools.Utils import Utils
+from charger import get_data
 
 
 class ConsoleApp:
@@ -145,24 +146,12 @@ class ConsoleApp:
         if filename is None:
             print("Le nom du fichier a creer est obligatoire")
 
-        charger_script_path = os.path.abspath("charger.py")
-
-        Utils.addToPathIfNotExists(charger_script_path)
-
         self.polynomes = []
-        os.system('{} {} {}'.format(charger_script_path, folder, filename))
-        '''
-        from charger import get_data
 
-        self.polynomes = get_data()
-        # for name, values in vars(charger).items():
-            # print(name, values)
-        # print(mes_polynomes)
-        # print(charger.get_data())
-        print(self.polynomes)
+        self.polynomes = get_data(folder, filename)
+
         print("=================")
         self.afficherPolynomes()
-        '''
 
 
 
