@@ -26,7 +26,7 @@ def traiter_polynomes():
      #
     # (folder, filename) = ('docs/', 'liste_polynomes_a_charger')
 
-    print("Entrez le chemin_dossier :")
+    print("Entrez le chemin_dossier (example docs/):")
     folder = input()
     if folder is None:
         print("Le chemin du dossier est obligatoire")

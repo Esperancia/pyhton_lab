@@ -132,7 +132,7 @@ class ConsoleApp:
 
 
     def chargerPolynomes(self):
-        print("Entrez le chemin_dossier :")
+        print("Entrez le chemin_dossier (example docs/):")
         folder = input()
         if folder is None:
             print("Le chemin du dossier est obligatoire")

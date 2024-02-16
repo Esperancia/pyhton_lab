@@ -9,6 +9,8 @@ from Tools.Term import Term
 class PolynomialToolbox:
     @classmethod
     def simplify(cls, l1) -> Polynomial:
+        l1.sort()
+
         termesPolynome: List[Term] = l1.getAllTerms()
         termesNouveauPolynome: List[Term] = []
 
