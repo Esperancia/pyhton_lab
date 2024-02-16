@@ -8,7 +8,7 @@ if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("il manque des arguments a l'appel")
 
-    polynomes_textes = (sys.argv[3]).split(';;')
+    polynomes_textes = list(filter(None, (sys.argv[3]).strip().split(';;')))
 
     (folder_path, file_name) = (sys.argv[1], sys.argv[2])
 
@@ -24,8 +24,9 @@ if __name__ == "__main__":
 
     with open(entire_file_path, append_write_option) as my_file:
         for block in polynomes_textes:
-            print(block)
             my_file.write(block.replace(';', '\n'))
-            my_file.write('\n\n')
+
+            if block != polynomes_textes[-1]:
+                my_file.write('\n\n')
 
         my_file.close()
